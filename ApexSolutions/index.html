@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexSolutions | Consultoría & Transformación Digital Empresarial</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            accent: {
+              500: '#6366f1',
+              600: '#4f46e5',
+            }
+          },
+          boxShadow: {
+            'glow': '0 0 40px -10px rgba(59, 130, 246, 0.35)',
+            'card-hover': '0 20px 35px -10px rgba(15, 23, 42, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Estilos personalizados para animaciones y scroll */
+    ::selection {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
+    
+    .glass-nav {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .dark .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 50%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Animación de Toast flotante */
+    @keyframes toastIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-toast {
+      animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Animación para modales */
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-modal {
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased transition-colors duration-300">
+
+  <!-- ======================================================== -->
+  <!-- TOAST NOTIFICATION CONTAINER (Flotante para capturas)   -->
+  <!-- ======================================================== -->
+  <div id="toast-container" class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none max-w-md w-full px-4"></div>
+
+  <!-- ======================================================== -->
+  <!-- HEADER & NAVEGACIÓN PRINCIPAL                          -->
+  <!-- ======================================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-nav bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/80 dark:border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo Corporativo -->
+      <a href="#inicio" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-accent-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="layers" class="w-6 h-6"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-1">
+            Apex<span class="text-brand-600 dark:text-brand-400 font-extrabold">Solutions</span>
+          </span>
+          <span class="text-[10px] tracking-widest uppercase font-semibold text-slate-400 dark:text-slate-500">Enterprise Consulting</span>
+        </div>
+      </a>
+
+      <!-- Menú Desktop -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <a href="#inicio" class="nav-link px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-white transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 active-link">Inicio</a>
+        <a href="#servicios" class="nav-link px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-white transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60">Servicios</a>
+        <a href="#nosotros" class="nav-link px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-white transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60">Nosotros</a>
+        <a href="#proyectos" class="nav-link px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-white transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60">Proyectos</a>
+        <a href="#metricas" class="nav-link px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-white transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60">Métricas</a>
+        <a href="#contacto" class="nav-link px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-white transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60">Contacto</a>
+      </nav>
+
+      <!-- Botones de Acción Derecha: Toggle Dark Mode + CTA -->
+      <div class="hidden sm:flex items-center gap-3">
+        <!-- Switch Dark / Light Mode -->
+        <button id="theme-toggle" aria-label="Cambiar tema" class="p-2.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+          <i id="theme-icon-sun" data-lucide="sun" class="w-4 h-4 hidden"></i>
+          <i id="theme-icon-moon" data-lucide="moon" class="w-4 h-4"></i>
+        </button>
+
+        <!-- CTA Destacado Cotización -->
+        <button id="btn-open-quote" class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-700 hover:to-accent-700 rounded-xl shadow-md shadow-brand-600/20 hover:shadow-lg hover:shadow-brand-600/30 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+          <span>Solicitar Cotización</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Botón Menú Móvil -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button id="theme-toggle-mobile" aria-label="Cambiar tema móvil" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800">
+          <i data-lucide="sun-medium" class="w-4 h-4"></i>
+        </button>
+        <button id="mobile-menu-btn" aria-label="Abrir menú" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+          <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
+          <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2 shadow-xl">
+      <a href="#inicio" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Inicio</a>
+      <a href="#servicios" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Servicios</a>
+      <a href="#nosotros" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Nosotros</a>
+      <a href="#proyectos" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Proyectos</a>
+      <a href="#metricas" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Métricas</a>
+      <a href="#contacto" class="mobile-nav-link block px-4 py-2.5 text-base font-medium rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Contacto</a>
+      <div class="pt-2">
+        <button id="btn-mobile-quote" class="w-full flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl">
+          <span>Solicitar Cotización</span>
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- HERO SECTION                                            -->
+  <!-- ======================================================== -->
+  <section id="inicio" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+    <!-- Fondos decorativos y gradientes sutiles -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-brand-500/20 to-accent-500/15 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="absolute -top-10 right-0 w-96 h-96 bg-brand-400/10 blur-[90px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Contenido textual Hero -->
+        <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+          
+          <!-- Badge interactivo de estatus -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 dark:bg-brand-950/60 border border-brand-200 dark:border-brand-800/80 text-brand-700 dark:text-brand-300 text-xs font-semibold shadow-sm">
+            <span class="flex h-2 w-2 rounded-full bg-brand-600 animate-ping"></span>
+            <span>Consultoría de Alto Impacto para Negocios Escalables</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          </div>
+
+          <!-- Título Principal -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+            Aceleramos la transformación digital de tu <span class="gradient-text">empresa</span>
+          </h1>
+
+          <!-- Subtítulo explicativo -->
+          <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            Diseñamos soluciones tecnológicas a la medida, optimizamos flujos de datos críticos e implementamos arquitecturas en la nube que impulsan resultados medibles y ventajas competitivas reales.
+          </p>
+
+          <!-- Botones de Acción Funcionales -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#servicios" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 hover:-translate-y-0.5 transition-all">
+              <span>Explorar Servicios</span>
+              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+
+            <a href="#contacto" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl shadow-sm hover:-translate-y-0.5 transition-all">
+              <i data-lucide="message-square" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+              <span>Agendar Reunión</span>
+            </a>
+          </div>
+
+          <!-- Sellos de confianza / Quick stats -->
+          <div class="pt-6 border-t border-slate-200/80 dark:border-slate-800/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+            <div>
+              <p class="text-2xl font-bold text-slate-900 dark:text-white">+180</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Proyectos Clave</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold text-slate-900 dark:text-white">99.8%</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">SLA Garantizado</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold text-slate-900 dark:text-white">12+</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Años de Liderazgo</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Visual Hero: Tarjeta Interactiva / Mockup Dashboard -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none rounded-2xl bg-gradient-to-b from-white to-slate-100 dark:from-slate-900 dark:to-slate-900/90 p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-2xl shadow-slate-900/10 dark:shadow-black/40">
+            
+            <!-- Barra superior estilo ventana -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                <span class="text-xs font-mono text-slate-400 ml-2">apex-core-engine v3.8</span>
+              </div>
+              <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full">
+                <i data-lucide="check" class="w-3 h-3"></i> Operativo
+              </span>
+            </div>
+
+            <!-- Mini Dashboard / Indicadores interactivos -->
+            <div class="mt-5 space-y-4">
+              <!-- KPI 1 -->
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between hover:border-brand-500 transition-colors cursor-pointer group">
+                <div class="flex items-center gap-3">
+                  <div class="p-2.5 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 group-hover:scale-110 transition-transform">
+                    <i data-lucide="trending-up" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Eficiencia Operativa</p>
+                    <p class="text-lg font-bold text-slate-800 dark:text-white">+42.8% en Q3</p>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-100/60 dark:bg-emerald-900/40 px-2 py-1 rounded-md">Optimizado</span>
+              </div>
+
+              <!-- KPI 2 -->
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between hover:border-brand-500 transition-colors cursor-pointer group">
+                <div class="flex items-center gap-3">
+                  <div class="p-2.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Seguridad & Cumplimiento</p>
+                    <p class="text-lg font-bold text-slate-800 dark:text-white">SOC 2 / ISO 27001</p>
+                  </div>
+                </div>
+                <span class="text-xs font-semibold text-brand-600 dark:text-brand-400 bg-brand-100/60 dark:bg-brand-900/40 px-2 py-1 rounded-md">Auditado</span>
+              </div>
+
+              <!-- Simulación de Gráfico / Flujo de Datos -->
+              <div class="p-4 rounded-xl bg-gradient-to-r from-brand-600 to-accent-600 text-white space-y-2">
+                <div class="flex justify-between items-center text-xs opacity-90">
+                  <span>Procesamiento de Datos en Tiempo Real</span>
+                  <span class="font-mono">1.2M req/seg</span>
+                </div>
+                <div class="w-full bg-white/20 h-2 rounded-full overflow-hidden">
+                  <div class="bg-white h-full rounded-full w-[88%]"></div>
+                </div>
+                <p class="text-[11px] text-white/80">Disponibilidad de infraestructura multirregión activa.</p>
+              </div>
+
+              <!-- Mini botón interactivo de prueba -->
+              <button onclick="ApexApp.triggerHeroDemo()" class="w-full py-2.5 text-xs font-semibold rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 flex items-center justify-center gap-2 transition-colors">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                <span>Simular Análisis de Rendimiento</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SECCIÓN DE SERVICIOS CORPORATIVOS (Cards/Grid)          -->
+  <!-- ======================================================== -->
+  <section id="servicios" class="py-24 bg-white dark:bg-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Encabezado de Sección -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-xs font-bold tracking-widest uppercase text-brand-600 dark:text-brand-400">Capacidades Estratégicas</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Soluciones integrales para la era de los datos
+        </h2>
+        <p class="text-base text-slate-600 dark:text-slate-300">
+          Proporcionamos servicios de ingeniería de software, arquitectura cloud y consultoría orientados a resultados cuantificables.
+        </p>
+      </div>
+
+      <!-- Grid de Tarjetas de Servicios -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Tarjeta 1: Desarrollo Web y Cloud -->
+        <div class="service-card group p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-brand-600 dark:text-brand-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300">
+              <i data-lucide="code-2" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+              Desarrollo Web & Plataformas Cloud
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Construcción de aplicaciones web modernas, arquitecturas de microservicios y portales corporativos de alto desempeño y máxima escalabilidad.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> SPAs y Arquitecturas Serverless</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Despliegues continuos CI/CD</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Integración fluida con AWS, Azure y GCP</li>
+            </ul>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+            <button onclick="ApexApp.openServiceModal('web-cloud')" class="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Conocer detalles</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-400">Enterprise Ready</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Gestión de Datos & Analytics -->
+        <div class="service-card group p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+              <i data-lucide="database" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+              Gestión de Datos & Business Intelligence
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Transformamos grandes volúmenes de datos dispersos en fuentes de verdad confiables con pipelines automatizados y dashboards ejecutivos en tiempo real.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Data Warehousing & Data Lakes</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Modelos predictivos e IA aplicada</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Dashboards analíticos interactivos</li>
+            </ul>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+            <button onclick="ApexApp.openServiceModal('data-bi')" class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Conocer detalles</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-400">Data-Driven</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Consultoría Estratégica -->
+        <div class="service-card group p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-xl bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 dark:text-cyan-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
+              <i data-lucide="briefcase" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+              Consultoría Estratégica & Gobernanza TI
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Asesoría C-Level para alinear la estrategia de negocio con la arquitectura tecnológica adecuada, mitigando riesgos y optimizando inversiones.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Auditorías de arquitectura y deuda técnica</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Hoja de ruta para transformación digital</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Optimización de costos cloud (FinOps)</li>
+            </ul>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+            <button onclick="ApexApp.openServiceModal('consulting-gov')" class="text-xs font-semibold text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Conocer detalles</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-400">Advisory</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4: Ciberseguridad & Resiliencia -->
+        <div class="service-card group p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+              <i data-lucide="shield" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              Ciberseguridad & Cumplimiento Normativo
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Blindaje proactivo de infraestructura y aplicaciones mediante pruebas de penetración, políticas Zero Trust y cumplimiento de normativas globales.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Pentesting y ethical hacking ético</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Arquitectura Zero Trust y controles IAM</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Planes de recuperación ante desastres (DRP)</li>
+            </ul>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+            <button onclick="ApexApp.openServiceModal('cybersecurity')" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Conocer detalles</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-400">Zero Trust</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta 5: Automatización & DevOps -->
+        <div class="service-card group p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition-all duration-300">
+              <i data-lucide="cpu" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              DevOps & Automatización Inteligente
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Acelera el time-to-market automatizando despliegues con Infraestructura como Código (IaC), orquestación con Kubernetes y monitoreo integral.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Infraestructura con Terraform & Ansible</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Kubernetes & Container Orchestration</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Observabilidad con Prometheus & Grafana</li>
+            </ul>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+            <button onclick="ApexApp.openServiceModal('devops')" class="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:text-amber-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Conocer detalles</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-400">Continuous CI</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta 6: Modernización de Sistemas Legacy -->
+        <div class="service-card group p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
+              <i data-lucide="refresh-cw" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              Modernización & Refactorización
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Evolución segura de sistemas monolíticos heredados hacia arquitecturas ágiles y modulares sin interrumpir las operaciones del negocio.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Migración de monolitos a microservicios</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Desacoplamiento de APIs RESTful & GraphQL</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Cero downtime durante el proceso</li>
+            </ul>
+          </div>
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
+            <button onclick="ApexApp.openServiceModal('modernization')" class="text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
+              <span>Conocer detalles</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-[11px] font-mono text-slate-400">Zero Downtime</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SECCIÓN NOSOTROS (Filosofía & Diferenciadores)         -->
+  <!-- ======================================================== -->
+  <section id="nosotros" class="py-24 bg-slate-100/70 dark:bg-slate-950 border-y border-slate-200/80 dark:border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Texto explicativo -->
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-bold tracking-widest uppercase text-brand-600 dark:text-brand-400">Quiénes Somos</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Ingeniería de vanguardia respaldada por un equipo de consultores senior
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base leading-relaxed">
+            En <strong>ApexSolutions</strong> no vendemos plantillas ni soluciones genéricas. Nos integramos como aliados estratégicos para resolver los desafíos de ingeniería y análisis de datos más complejos de las empresas en crecimiento.
+          </p>
+
+          <!-- Tarjetas de valores / pilares -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div class="text-brand-600 dark:text-brand-400 mb-2">
+                <i data-lucide="award" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm">Talento de Élite</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">El 100% de nuestros ingenieros son perfiles Senior certificados internacionalmente.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div class="text-indigo-600 dark:text-indigo-400 mb-2">
+                <i data-lucide="gauge" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm">Orientados a Negocio</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Cada línea de código y decisión técnica debe impactar positivamente tu cuenta de resultados.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div class="text-emerald-600 dark:text-emerald-400 mb-2">
+                <i data-lucide="lock" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm">Seguridad por Diseño</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Gobernanza estricta, privacidad y cumplimiento legal desde la primera fase de desarrollo.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div class="text-cyan-600 dark:text-cyan-400 mb-2">
+                <i data-lucide="zap" class="w-6 h-6"></i>
+              </div>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm">Entregas Ágiles</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sprints bisemanales con visibilidad completa, demos en vivo y adaptación inmediata.</p>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="ApexApp.showAboutModal()" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700">
+              <span>Leer manifiesto corporativo y certificaciones</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Imagen / Gráfico de Respaldo Corporativo -->
+        <div class="lg:col-span-6">
+          <div class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-slate-900 text-white p-8 space-y-6">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-500/20 blur-3xl rounded-full"></div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <i data-lucide="compass" class="w-5 h-5 text-brand-400"></i>
+                <span class="text-xs uppercase tracking-wider font-semibold text-brand-300">Nuestra Trayectoria</span>
+              </div>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30 font-mono">2014 - Presente</span>
+            </div>
+
+            <h3 class="text-2xl font-bold leading-snug">
+              "La tecnología sólo es valiosa cuando resuelve un problema real con elegancia y robustez."
+            </h3>
+
+            <!-- Testimonio interno / Firma de liderazgo -->
+            <div class="pt-4 border-t border-slate-800 flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center font-bold text-base shadow-md">
+                AS
+              </div>
+              <div>
+                <p class="text-sm font-bold text-white">Comité de Dirección Técnica</p>
+                <p class="text-xs text-slate-400">ApexSolutions Global Advisory Board</p>
+              </div>
+            </div>
+
+            <!-- Badges de tecnología -->
+            <div class="pt-2 flex flex-wrap gap-2 text-[11px] text-slate-300 font-mono">
+              <span class="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700">TypeScript</span>
+              <span class="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700">Python Data</span>
+              <span class="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700">Kubernetes</span>
+              <span class="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700">Terraform</span>
+              <span class="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700">AWS / Azure</span>
+              <span class="px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700">PostgreSQL</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SECCIÓN DE PORTAFOLIO / CASOS DE ÉXITO CON FILTROS      -->
+  <!-- ======================================================== -->
+  <section id="proyectos" class="py-24 bg-white dark:bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Encabezado -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-xs font-bold tracking-widest uppercase text-brand-600 dark:text-brand-400">Casos de Éxito</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+            Proyectos que redefinieron industrias
+          </h2>
+          <p class="text-base text-slate-600 dark:text-slate-300 mt-2 max-w-xl">
+            Explora cómo ayudamos a empresas líderes a escalar operaciones, acelerar su rendimiento y reducir costos operativos.
+          </p>
+        </div>
+
+        <!-- Botones de Filtro Funcionales / Tabs -->
+        <div id="portfolio-filters" class="flex flex-wrap gap-2 p-1.5 bg-slate-100 dark:bg-slate-800 rounded-xl self-start md:self-auto border border-slate-200 dark:border-slate-700">
+          <button data-filter="all" class="portfolio-filter-btn active-tab px-4 py-2 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-900 text-brand-600 dark:text-brand-400 shadow-sm">
+            Todos
+          </button>
+          <button data-filter="cloud" class="portfolio-filter-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all">
+            Cloud & Web
+          </button>
+          <button data-filter="fintech" class="portfolio-filter-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all">
+            Fintech & Banca
+          </button>
+          <button data-filter="data" class="portfolio-filter-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all">
+            Data & IA
+          </button>
+        </div>
+      </div>
+
+      <!-- Galería de Proyectos (Grid) -->
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Proyecto 1: Fintech Core -->
+        <div class="portfolio-item rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between" data-category="fintech">
+          <div>
+            <div class="relative h-48 bg-gradient-to-tr from-brand-900 to-indigo-900 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full bg-white/20 text-white backdrop-blur-sm self-start">
+                Fintech & Pagos
+              </span>
+              <div>
+                <p class="text-xs text-white/80 font-mono">Banca Digital 2.0</p>
+                <h4 class="text-xl font-bold text-white">Plataforma Nexus Pay</h4>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Arquitectura de microservicios tolerante a fallas con procesamiento de transacciones financieras en menos de 45 milisegundos con certificación PCI-DSS.
+              </p>
+              <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <span class="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Impacto cuantificado:</span>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">+340% volumen transaccional</span>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <button onclick="ApexApp.openProjectModal('nexus-pay')" class="w-full py-2.5 px-4 text-xs font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-slate-700 hover:bg-brand-100 dark:hover:bg-slate-600 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+              <span>Ver caso de estudio completo</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Proyecto 2: Cloud Logistics -->
+        <div class="portfolio-item rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between" data-category="cloud">
+          <div>
+            <div class="relative h-48 bg-gradient-to-tr from-cyan-900 to-blue-900 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full bg-white/20 text-white backdrop-blur-sm self-start">
+                Cloud & Cadena de Suministro
+              </span>
+              <div>
+                <p class="text-xs text-white/80 font-mono">Logística Global</p>
+                <h4 class="text-xl font-bold text-white">OmniTrack Cloud Portal</h4>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Portal empresarial multirregión con trazabilidad IoT de envíos marítimos y terrestres en tiempo real para más de 50,000 contenedores diarios.
+              </p>
+              <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <span class="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Impacto cuantificado:</span>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">-52% tiempo de entrega</span>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <button onclick="ApexApp.openProjectModal('omnitrack')" class="w-full py-2.5 px-4 text-xs font-semibold text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-slate-700 hover:bg-cyan-100 dark:hover:bg-slate-600 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+              <span>Ver caso de estudio completo</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Proyecto 3: Data Analytics & IA Salud -->
+        <div class="portfolio-item rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between" data-category="data">
+          <div>
+            <div class="relative h-48 bg-gradient-to-tr from-purple-900 to-indigo-950 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-purple-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full bg-white/20 text-white backdrop-blur-sm self-start">
+                Data Lake & Healthcare
+              </span>
+              <div>
+                <p class="text-xs text-white/80 font-mono">Salud & Analítica</p>
+                <h4 class="text-xl font-bold text-white">HealthPulse Analytics</h4>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Centralización y anonimización de historiales médicos hospitalarios con algoritmos predictivos para diagnóstico temprano de riesgos de UCI.
+              </p>
+              <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <span class="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Impacto cuantificado:</span>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">99.4% precisión diagnóstica</span>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <button onclick="ApexApp.openProjectModal('healthpulse')" class="w-full py-2.5 px-4 text-xs font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-slate-700 hover:bg-purple-100 dark:hover:bg-slate-600 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+              <span>Ver caso de estudio completo</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Proyecto 4: Finanzas & Trading Algorítmico -->
+        <div class="portfolio-item rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between" data-category="fintech">
+          <div>
+            <div class="relative h-48 bg-gradient-to-tr from-slate-900 to-brand-950 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-brand-600/30 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full bg-white/20 text-white backdrop-blur-sm self-start">
+                Capital Markets
+              </span>
+              <div>
+                <p class="text-xs text-white/80 font-mono">Bolsa & Mercados</p>
+                <h4 class="text-xl font-bold text-white">QuantumTrade Terminal</h4>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Terminal web interactiva para operadores de mesas de dinero con visualizaciones de velas en WebGL y órdenes ejecutadas por WebSockets.
+              </p>
+              <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <span class="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Impacto cuantificado:</span>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">Latencia &lt; 12ms</span>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <button onclick="ApexApp.openProjectModal('quantum-trade')" class="w-full py-2.5 px-4 text-xs font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-slate-700 hover:bg-brand-100 dark:hover:bg-slate-600 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+              <span>Ver caso de estudio completo</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Proyecto 5: Modernización E-Commerce Cloud -->
+        <div class="portfolio-item rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between" data-category="cloud">
+          <div>
+            <div class="relative h-48 bg-gradient-to-tr from-indigo-900 to-brand-900 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-indigo-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full bg-white/20 text-white backdrop-blur-sm self-start">
+                Retail & Omnicanalidad
+              </span>
+              <div>
+                <p class="text-xs text-white/80 font-mono">Retail Enterprise</p>
+                <h4 class="text-xl font-bold text-white">Vanguard Retail Engine</h4>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Migración completa de un e-commerce monolítico a arquitectura Headless con Next.js y backend en Kubernetes, soportando picos de Black Friday sin caídas.
+              </p>
+              <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <span class="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Impacto cuantificado:</span>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">100% Uptime en campañas</span>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <button onclick="ApexApp.openProjectModal('vanguard-retail')" class="w-full py-2.5 px-4 text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-slate-600 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+              <span>Ver caso de estudio completo</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Proyecto 6: Inteligencia Operativa Industrial -->
+        <div class="portfolio-item rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between" data-category="data">
+          <div>
+            <div class="relative h-48 bg-gradient-to-tr from-emerald-900 to-slate-900 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-emerald-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform"></div>
+              <span class="inline-block px-3 py-1 text-[11px] font-bold rounded-full bg-white/20 text-white backdrop-blur-sm self-start">
+                Industria 4.0 & IoT
+              </span>
+              <div>
+                <p class="text-xs text-white/80 font-mono">Manufactura Inteligente</p>
+                <h4 class="text-xl font-bold text-white">AeroPlant Predictive</h4>
+              </div>
+            </div>
+            <div class="p-6 space-y-3">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Ingesta de telemetría de turbinas y líneas de producción robotizadas con mantenimiento predictivo basado en machine learning de borde (Edge AI).
+              </p>
+              <div class="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <span class="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Impacto cuantificado:</span>
+                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">-\$2.4M en paradas técnicas</span>
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <button onclick="ApexApp.openProjectModal('aeroplant')" class="w-full py-2.5 px-4 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-slate-700 hover:bg-emerald-100 dark:hover:bg-slate-600 rounded-xl transition-colors flex items-center justify-center gap-1.5">
+              <span>Ver caso de estudio completo</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SECCIÓN DE MÉTRICAS & LOGROS (Contadores y Estadísticas) -->
+  <!-- ======================================================== -->
+  <section id="metricas" class="py-20 bg-gradient-to-br from-slate-900 via-slate-900 to-brand-950 text-white relative overflow-hidden">
+    <!-- Luces ambientales -->
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-accent-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Título de métricas -->
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span class="text-xs font-bold tracking-widest uppercase text-brand-400">Resultados Verificables</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          Cifras que validan nuestro compromiso
+        </h2>
+        <p class="text-slate-400 text-sm">
+          Medimos el éxito en función del valor financiero y tecnológico real generado para nuestros clientes.
+        </p>
+      </div>
+
+      <!-- Grid de Contadores -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        
+        <!-- Contador 1 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-center hover:border-brand-500/50 transition-colors">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center">
+            <i data-lucide="folder-check" class="w-6 h-6"></i>
+          </div>
+          <div class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white counter" data-target="180">0</div>
+          <span class="text-xl sm:text-2xl font-bold text-brand-400">+</span>
+          <p class="mt-2 text-xs sm:text-sm font-medium text-slate-300">Proyectos Implementados</p>
+          <p class="mt-1 text-[11px] text-slate-500">En 6 verticales de industria</p>
+        </div>
+
+        <!-- Contador 2 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-center hover:border-brand-500/50 transition-colors">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <i data-lucide="smile" class="w-6 h-6"></i>
+          </div>
+          <div class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white counter" data-target="99">0</div>
+          <span class="text-xl sm:text-2xl font-bold text-emerald-400">.8%</span>
+          <p class="mt-2 text-xs sm:text-sm font-medium text-slate-300">Satisfacción de Clientes</p>
+          <p class="mt-1 text-[11px] text-slate-500">Net Promoter Score (NPS) +88</p>
+        </div>
+
+        <!-- Contador 3 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-center hover:border-brand-500/50 transition-colors">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+            <i data-lucide="globe-2" class="w-6 h-6"></i>
+          </div>
+          <div class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white counter" data-target="14">0</div>
+          <span class="text-xl sm:text-2xl font-bold text-indigo-400"> Países</span>
+          <p class="mt-2 text-xs sm:text-sm font-medium text-slate-300">Presencia Global</p>
+          <p class="mt-1 text-[11px] text-slate-500">América, Europa y LATAM</p>
+        </div>
+
+        <!-- Contador 4 -->
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm text-center hover:border-brand-500/50 transition-colors">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+            <i data-lucide="circle-dollar-sign" class="w-6 h-6"></i>
+          </div>
+          <span class="text-2xl sm:text-4xl font-extrabold text-amber-400">$</span>
+          <span class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white counter" data-target="65">0</span>
+          <span class="text-xl sm:text-2xl font-bold text-amber-400">M+</span>
+          <p class="mt-2 text-xs sm:text-sm font-medium text-slate-300">ROI Generado</p>
+          <p class="mt-1 text-[11px] text-slate-500">Ahorro y nuevas fuentes de ingreso</p>
+        </div>
+
+      </div>
+
+      <!-- Barra de logos de partners/clientes para enriquecer el layout -->
+      <div class="mt-16 pt-12 border-t border-slate-800 text-center space-y-6">
+        <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Empresas que confían en nuestra infraestructura</p>
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+          <span class="font-bold tracking-wider text-base sm:text-lg text-slate-300 flex items-center gap-2"><i data-lucide="hexagon" class="w-5 h-5"></i> NEXUS FINANCIAL</span>
+          <span class="font-bold tracking-wider text-base sm:text-lg text-slate-300 flex items-center gap-2"><i data-lucide="triangle" class="w-5 h-5"></i> CLOUDLOGIX</span>
+          <span class="font-bold tracking-wider text-base sm:text-lg text-slate-300 flex items-center gap-2"><i data-lucide="circle" class="w-5 h-5"></i> BIOHEALTH GLOBAL</span>
+          <span class="font-bold tracking-wider text-base sm:text-lg text-slate-300 flex items-center gap-2"><i data-lucide="box" class="w-5 h-5"></i> VANGUARD RETAIL</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SECCIÓN DE CONTACTO CORPORATIVO CON FORMULARIO ACTIVO    -->
+  <!-- ======================================================== -->
+  <section id="contacto" class="py-24 bg-slate-50 dark:bg-slate-950 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Información de Contacto / Oficina -->
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <span class="text-xs font-bold tracking-widest uppercase text-brand-600 dark:text-brand-400">Hablemos de Negocios</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
+              ¿Listo para dar el siguiente paso tecnológico?
+            </h2>
+            <p class="text-base text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Completa el formulario y uno de nuestros directores de tecnología o consultores senior se pondrá en contacto contigo en menos de 24 horas hábiles.
+            </p>
+          </div>
+
+          <!-- Canales Directos -->
+          <div class="space-y-4">
+            
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="p-3 rounded-lg bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-xs text-slate-500 dark:text-slate-400">Correo Electrónico Corporativo</p>
+                <div class="flex items-center justify-between mt-0.5">
+                  <span class="text-sm font-semibold text-slate-900 dark:text-white">contacto@apexsolutions.corp</span>
+                  <button onclick="ApexApp.copyToClipboard('contacto@apexsolutions.corp')" class="text-xs text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                <i data-lucide="phone-call" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Línea de Atención Ejecutiva</p>
+                <p class="text-sm font-semibold text-slate-900 dark:text-white mt-0.5">+54 (11) 4892-9000 / +1 (800) 459-APEX</p>
+                <p class="text-[11px] text-slate-400">Lunes a Viernes de 09:00 a 18:00 (GMT-3)</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
+              <div class="p-3 rounded-lg bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Sede Central y Centros de Operación</p>
+                <p class="text-sm font-semibold text-slate-900 dark:text-white mt-0.5">Torre Empresarial Apex, Piso 18</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Av. del Libertador 4980, Buenos Aires (Nodos en Miami y Madrid)</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Acuerdo de Confidencialidad Badge -->
+          <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
+            <i data-lucide="shield-alert" class="w-5 h-5 text-brand-600 shrink-0"></i>
+            <span>Firmamos <strong>Acuerdo de Confidencialidad (NDA)</strong> previo a la primera llamada exploratoria para proteger tu propiedad intelectual.</span>
+          </div>
+
+        </div>
+
+        <!-- Formulario Interactivo -->
+        <div class="lg:col-span-7">
+          <div class="bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-900/5">
+            
+            <div class="mb-8">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Envíanos los requerimientos de tu proyecto</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Recibirás un diagnóstico preliminar sin ningún compromiso.</p>
+            </div>
+
+            <form id="contact-form" onsubmit="ApexApp.handleContactSubmit(event)" class="space-y-6">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Nombre -->
+                <div>
+                  <label for="contact-name" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                    Nombre Completo *
+                  </label>
+                  <div class="relative">
+                    <input type="text" id="contact-name" name="name" required placeholder="Ej. Carlos Mendoza" 
+                      class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-slate-900 transition-all">
+                  </div>
+                </div>
+
+                <!-- Correo -->
+                <div>
+                  <label for="contact-email" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                    Email Corporativo *
+                  </label>
+                  <div class="relative">
+                    <input type="email" id="contact-email" name="email" required placeholder="carlos@empresa.com" 
+                      class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-slate-900 transition-all">
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Teléfono / WhatsApp -->
+                <div>
+                  <label for="contact-phone" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                    Teléfono / WhatsApp
+                  </label>
+                  <input type="tel" id="contact-phone" name="phone" placeholder="+54 9 11 1234-5678" 
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-slate-900 transition-all">
+                </div>
+
+                <!-- Servicio de Interés -->
+                <div>
+                  <label for="contact-service" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                    Servicio Principal Requerido *
+                  </label>
+                  <select id="contact-service" name="service" required
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-slate-900 transition-all">
+                    <option value="" disabled selected>Selecciona un servicio</option>
+                    <option value="web-cloud">Desarrollo Web & Plataformas Cloud</option>
+                    <option value="data-bi">Gestión de Datos & Business Intelligence</option>
+                    <option value="consulting">Consultoría Estratégica & Gobernanza TI</option>
+                    <option value="security">Ciberseguridad & Continuidad Operativa</option>
+                    <option value="devops">DevOps & Automatización</option>
+                    <option value="modernization">Modernización de Sistemas Legacy</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Mensaje -->
+              <div>
+                <label for="contact-message" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                  Detalles del Proyecto o Necesidad *
+                </label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntanos sobre el alcance, plazos estimados o desafíos específicos que enfrentan..."
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white dark:focus:bg-slate-900 transition-all resize-none"></textarea>
+              </div>
+
+              <!-- Casilla de Aceptación -->
+              <div class="flex items-center gap-3">
+                <input type="checkbox" id="terms-agree" required class="w-4 h-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500 dark:bg-slate-800 dark:border-slate-700">
+                <label for="terms-agree" class="text-xs text-slate-500 dark:text-slate-400">
+                  Acepto el tratamiento de datos y política de privacidad de ApexSolutions.
+                </label>
+              </div>
+
+              <!-- Botón de Envío con Estado de Carga -->
+              <div>
+                <button type="submit" id="btn-submit-contact" class="w-full py-4 px-6 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-700 hover:to-accent-700 shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2">
+                  <span id="submit-text">Enviar Solicitud de Consulta</span>
+                  <i id="submit-icon" data-lucide="send" class="w-4 h-4"></i>
+                  <div id="submit-spinner" class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- FOOTER CORPORATIVO                                      -->
+  <!-- ======================================================== -->
+  <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        
+        <!-- Columna 1: Logo & Resumen -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-600 to-accent-600 flex items-center justify-center text-white">
+              <i data-lucide="layers" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold text-white tracking-tight">Apex<span class="text-brand-400">Solutions</span></span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
+            Consultora tecnológica líder en diseño e ingeniería de software empresarial, transformación cloud y gobierno de datos para organizaciones de misión crítica.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de ApexSolutions" title="LinkedIn" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.67 1.67 0 1 0 0 3.34 1.67 1.67 0 0 0 0-3.34Z"/>
+              </svg>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub de ApexSolutions" title="GitHub" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/>
+              </svg>
+            </a>
+            <!-- X / Twitter -->
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) de ApexSolutions" title="X (Twitter)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <!-- YouTube -->
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube de ApexSolutions" title="YouTube" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div class="space-y-3">
+          <p class="font-bold text-white uppercase tracking-wider text-xs">Enlaces</p>
+          <ul class="space-y-2">
+            <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
+            <li><a href="#nosotros" class="hover:text-white transition-colors">Nosotros</a></li>
+            <li><a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a></li>
+            <li><a href="#metricas" class="hover:text-white transition-colors">Métricas</a></li>
+            <li><a href="#contacto" class="hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Especialidades -->
+        <div class="space-y-3">
+          <p class="font-bold text-white uppercase tracking-wider text-xs">Especialidades</p>
+          <ul class="space-y-2">
+            <li><a href="#servicios" class="hover:text-white transition-colors">Arquitectura Cloud</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Data Pipelines</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Ciberseguridad SOC2</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">DevOps & CI/CD</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Modernización Legacy</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Legal & Cumplimiento -->
+        <div class="space-y-3">
+          <p class="font-bold text-white uppercase tracking-wider text-xs">Legal & Garantía</p>
+          <ul class="space-y-2">
+            <li><a href="javascript:void(0)" onclick="ApexApp.showToast('Privacidad', 'Normativa GDPR & Ley 25.326 aplicada.', 'info')" class="hover:text-white transition-colors">Política de Privacidad</a></li>
+            <li><a href="javascript:void(0)" onclick="ApexApp.showToast('Términos', 'Términos de servicio para empresas vigentes.', 'info')" class="hover:text-white transition-colors">Términos de Servicio</a></li>
+            <li><a href="javascript:void(0)" onclick="ApexApp.showToast('Seguridad', 'Certificación SOC-2 Tipo II en curso.', 'info')" class="hover:text-white transition-colors">Seguridad de la Información</a></li>
+            <li><a href="javascript:void(0)" onclick="ApexApp.showToast('SLA', 'Garantía contractual de disponibilidad 99.8%.', 'info')" class="hover:text-white transition-colors">Acuerdos SLA</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© 2026 ApexSolutions Corporate Consulting. Todos los derechos reservados.</p>
+        <p class="text-slate-500">Diseñado con estándares de alta accesibilidad, HTML5, Tailwind CSS y JavaScript Vanilla.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: SOLICITAR COTIZACIÓN (Interactivo para capturas)  -->
+  <!-- ======================================================== -->
+  <div id="quote-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl relative animate-modal">
+      
+      <!-- Botón Cerrar -->
+      <button onclick="ApexApp.closeQuoteModal()" class="absolute top-6 right-6 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-2 mb-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Solicitud Inmediata</span>
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Solicitar Cotización de Proyecto</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Selecciona los parámetros de tu requerimiento y te enviaremos una estimación técnica.</p>
+      </div>
+
+      <form onsubmit="ApexApp.handleQuoteSubmit(event)" class="space-y-4">
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nombre o Razón Social</label>
+          <input type="text" id="quote-company" required placeholder="Ej. Corporación Global S.A." 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Email de Contacto</label>
+          <input type="email" id="quote-email" required placeholder="director@empresa.com" 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Rango Estimado de Presupuesto (USD)</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="cursor-pointer text-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 text-xs">
+              <input type="radio" name="budget" value="10k-30k" class="hidden peer" checked>
+              <div class="peer-checked:font-bold peer-checked:text-brand-600 dark:peer-checked:text-brand-400 peer-checked:border-brand-600">$10k - $30k</div>
+            </label>
+            <label class="cursor-pointer text-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 text-xs">
+              <input type="radio" name="budget" value="30k-70k" class="hidden peer">
+              <div class="peer-checked:font-bold peer-checked:text-brand-600 dark:peer-checked:text-brand-400 peer-checked:border-brand-600">$30k - $70k</div>
+            </label>
+            <label class="cursor-pointer text-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 text-xs">
+              <input type="radio" name="budget" value="70k+" class="hidden peer">
+              <div class="peer-checked:font-bold peer-checked:text-brand-600 dark:peer-checked:text-brand-400 peer-checked:border-brand-600">$70k+</div>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Resumen del Requerimiento</label>
+          <textarea id="quote-notes" rows="3" placeholder="Describe brevemente el objetivo principal..." 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none resize-none"></textarea>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-3">
+          <button type="button" onclick="ApexApp.closeQuoteModal()" class="px-4 py-2.5 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+            Cancelar
+          </button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 transition-colors shadow-md shadow-brand-600/30">
+            Generar Propuesta
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL GENÉRICO DINÁMICO (Para Servicios & Casos de Estudio) -->
+  <!-- ======================================================== -->
+  <div id="dynamic-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl relative animate-modal">
+      
+      <button onclick="ApexApp.closeDynamicModal()" class="absolute top-6 right-6 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div id="dynamic-modal-content">
+        <!-- Contenido inyectado dinámicamente con JavaScript -->
+      </div>
+
+      <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
+        <button onclick="ApexApp.closeDynamicModal()" class="px-4 py-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+          Cerrar
+        </button>
+        <button onclick="ApexApp.closeDynamicModal(); ApexApp.openQuoteModal();" class="px-4 py-2 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow">
+          Cotizar esta Solución
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Botón Flotante Scroll to Top -->
+  <button id="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xl opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:scale-110">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT VANILLA (Lógica de interactividad completa)    -->
+  <!-- ======================================================== -->
+  <script>
+    /**
+     * Módulo principal de la aplicación: ApexApp
+     * Maneja eventos, navegación suave, filtros, modales, contadores y notificaciones toast.
+     */
+    const ApexApp = {
+      
+      // Inicialización general al cargar el DOM
+      init() {
+        this.initTheme();
+        this.initLucideIcons();
+        this.initScrollNavigation();
+        this.initPortfolioFilters();
+        this.initAnimatedCounters();
+        this.initModals();
+        this.initMobileMenu();
+        this.initScrollToTop();
+        console.log("ApexSolutions SPA inicializada correctamente.");
+      },
+
+      // Inicializar iconos de Lucide
+      initLucideIcons() {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      },
+
+      // Gestión de Tema Claro / Oscuro con persistencia en localStorage
+      initTheme() {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const sunIcon = document.getElementById('theme-icon-sun');
+        const moonIcon = document.getElementById('theme-icon-moon');
+
+        const savedTheme = localStorage.getItem('apex_theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+          if (sunIcon && moonIcon) {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+          }
+        } else {
+          document.documentElement.classList.remove('dark');
+          if (sunIcon && moonIcon) {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+          }
+        }
+
+        const toggleTheme = () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('apex_theme', isDark ? 'dark' : 'light');
+          
+          if (sunIcon && moonIcon) {
+            sunIcon.classList.toggle('hidden', !isDark);
+            moonIcon.classList.toggle('hidden', isDark);
+          }
+
+          this.showToast(
+            'Modo de Visualización',
+            `Cambiado a tema ${isDark ? 'Oscuro' : 'Claro'} para capturas visuales.`,
+            'info'
+          );
+        };
+
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+      },
+
+      // Navegación suave y marcado de enlaces activos al scrollear
+      initScrollNavigation() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+          let currentSectionId = '';
+          const scrollPosition = window.pageYOffset + 120;
+
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+              currentSectionId = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('text-brand-600', 'dark:text-brand-400', 'font-bold');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+              link.classList.add('text-brand-600', 'dark:text-brand-400', 'font-bold');
+            }
+          });
+        });
+      },
+
+      // Menú Móvil
+      initMobileMenu() {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const openIcon = document.getElementById('menu-icon-open');
+        const closeIcon = document.getElementById('menu-icon-close');
+        const links = document.querySelectorAll('.mobile-nav-link');
+
+        if (!btn || !menu) return;
+
+        btn.addEventListener('click', () => {
+          const isOpen = !menu.classList.contains('hidden');
+          menu.classList.toggle('hidden');
+          openIcon.classList.toggle('hidden', !isOpen);
+          closeIcon.classList.toggle('hidden', isOpen);
+        });
+
+        links.forEach(l => {
+          l.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            openIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+          });
+        });
+
+        const mobileQuote = document.getElementById('btn-mobile-quote');
+        if (mobileQuote) {
+          mobileQuote.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            openIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            ApexApp.openQuoteModal();
+          });
+        }
+      },
+
+      // Filtros de Portafolio interactivos
+      initPortfolioFilters() {
+        const buttons = document.querySelectorAll('.portfolio-filter-btn');
+        const items = document.querySelectorAll('.portfolio-item');
+
+        buttons.forEach(button => {
+          button.addEventListener('click', () => {
+            const filterValue = button.getAttribute('data-filter');
+
+            // Actualizar estilo visual de los tabs
+            buttons.forEach(btn => {
+              btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-brand-600', 'dark:text-brand-400', 'shadow-sm', 'font-bold');
+              btn.classList.add('text-slate-600', 'dark:text-slate-300', 'font-medium');
+            });
+            button.classList.add('bg-white', 'dark:bg-slate-900', 'text-brand-600', 'dark:text-brand-400', 'shadow-sm', 'font-bold');
+            button.classList.remove('text-slate-600', 'dark:text-slate-300', 'font-medium');
+
+            // Filtrar elementos con animación de fundido
+            items.forEach(item => {
+              const category = item.getAttribute('data-category');
+              if (filterValue === 'all' || category === filterValue) {
+                item.style.display = 'flex';
+                setTimeout(() => {
+                  item.style.opacity = '1';
+                  item.style.transform = 'scale(1)';
+                }, 50);
+              } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                  item.style.display = 'none';
+                }, 200);
+              }
+            });
+
+            ApexApp.showToast(
+              'Filtro Aplicado',
+              `Mostrando proyectos: ${button.textContent.trim()}`,
+              'info'
+            );
+          });
+        });
+      },
+
+      // Animación de Contadores Numéricos al entrar en vista
+      initAnimatedCounters() {
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        const animate = () => {
+          counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let current = 0;
+            const increment = target / 40;
+
+            const update = () => {
+              current += increment;
+              if (current < target) {
+                counter.innerText = Math.ceil(current);
+                setTimeout(update, 25);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            update();
+          });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !animated) {
+              animate();
+              animated = true;
+            }
+          });
+        }, { threshold: 0.3 });
+
+        const metricsSection = document.getElementById('metricas');
+        if (metricsSection) {
+          observer.observe(metricsSection);
+        }
+      },
+
+      // Botón Scroll to Top
+      initScrollToTop() {
+        const btn = document.getElementById('btn-back-to-top');
+        if (!btn) return;
+
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 500) {
+            btn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            btn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+          } else {
+            btn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            btn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+          }
+        });
+      },
+
+      // Manejadores de Modales
+      initModals() {
+        const openQuoteBtn = document.getElementById('btn-open-quote');
+        if (openQuoteBtn) {
+          openQuoteBtn.addEventListener('click', () => this.openQuoteModal());
+        }
+
+        // Cerrar con Escape
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.closeQuoteModal();
+            this.closeDynamicModal();
+          }
+        });
+      },
+
+      openQuoteModal() {
+        const modal = document.getElementById('quote-modal');
+        if (modal) {
+          modal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
+      },
+
+      closeQuoteModal() {
+        const modal = document.getElementById('quote-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      },
+
+      closeDynamicModal() {
+        const modal = document.getElementById('dynamic-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      },
+
+      // Modal para Detalles de Servicios
+      openServiceModal(serviceKey) {
+        const servicesData = {
+          'web-cloud': {
+            title: 'Desarrollo Web & Plataformas Cloud',
+            badge: 'Ingeniería de Software',
+            description: 'Especializados en crear plataformas web de alto tráfico utilizando Next.js, Node.js y contenedores orquestados con Kubernetes en infraestructuras AWS y GCP.',
+            bullets: [
+              'Tiempos de carga First Contentful Paint < 0.8s.',
+              'Arquitectura desacoplada y escalabilidad horizontal automática.',
+              'Monitoreo APM y observabilidad con Datadog y Prometheus.'
+            ]
+          },
+          'data-bi': {
+            title: 'Gestión de Datos & Business Intelligence',
+            badge: 'Big Data & IA',
+            description: 'Diseño de pipelines ETL/ELT con Apache Airflow, Snowflake y Databricks. Centralizamos la información de tu empresa para entregar analítica certera a directores y tomadores de decisiones.',
+            bullets: [
+              'Modelos predictivos de retención y análisis de clientes.',
+              'Data Governance para cumplimiento legal estricto.',
+              'Paneles ejecutivos en tiempo real con PowerBI y Tableau.'
+            ]
+          },
+          'consulting-gov': {
+            title: 'Consultoría Estratégica & Gobernanza TI',
+            badge: 'Asesoría C-Level',
+            description: 'Evaluamos el estado técnico actual de tu compañía, eliminamos redundancias en licencias de software y trazamos planes estratégicos de modernización tecnológica a 3 y 5 años.',
+            bullets: [
+              'Auditorías exhaustivas de ciberseguridad y deuda técnica.',
+              'Estrategias de optimización de costos en la nube (FinOps).',
+              'Acompañamiento en procesos de selección y liderazgo de talento técnico.'
+            ]
+          },
+          'cybersecurity': {
+            title: 'Ciberseguridad & Continuidad Operativa',
+            badge: 'Seguridad Defensiva',
+            description: 'Protección integral de infraestructuras críticas contra ataques cibernéticos, fugas de datos y ransomware mediante auditorías continuas y controles estrictos.',
+            bullets: [
+              'Pruebas de intrusión (Pentesting) periódicas.',
+              'Implementación de autenticación multifactor (MFA) y Zero Trust.',
+              'Respaldo inmutable y planes de recuperación ante desastres (DRP).'
+            ]
+          },
+          'devops': {
+            title: 'DevOps & Automatización Inteligente',
+            badge: 'CI/CD & Kubernetes',
+            description: 'Implementación de pipelines de despliegue automatizados para reducir de días a minutos el tiempo que toma llevar nuevo código a producción.',
+            bullets: [
+              'Infraestructura gestionada como código con Terraform.',
+              'Clusterización y autoescalado con Kubernetes.',
+              'Reducción del 70% en incidentes de despliegue.'
+            ]
+          },
+          'modernization': {
+            title: 'Modernización de Sistemas Legacy',
+            badge: 'Arquitectura Evolutiva',
+            description: 'Transición gradual de sistemas monolíticos obsoletos hacia microservicios modernos y APIs REST/GraphQL sin interrumpir la operación del negocio.',
+            bullets: [
+              'Patrón Strangler Fig para migración progresiva.',
+              'Modernización de bases de datos relacionales antiguas.',
+              'Preservación absoluta de la lógica de negocio validada.'
+            ]
+          }
+        };
+
+        const item = servicesData[serviceKey];
+        if (!item) return;
+
+        const container = document.getElementById('dynamic-modal-content');
+        container.innerHTML = `
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 text-xs font-semibold">
+              ${item.badge}
+            </span>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${item.title}</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${item.description}</p>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+              <h5 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Beneficios Principales</h5>
+              <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                ${item.bullets.map(b => `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>${b}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        `;
+
+        const modal = document.getElementById('dynamic-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        this.initLucideIcons();
+      },
+
+      // Modal para Casos de Estudio del Portafolio
+      openProjectModal(projectKey) {
+        const projectsData = {
+          'nexus-pay': {
+            title: 'Plataforma Financiera Nexus Pay',
+            category: 'Fintech & Medios de Pago',
+            client: 'Nexus Global Financial Inc.',
+            challenge: 'La arquitectura existente sufría cuellos de botella severos en fechas de alto volumen de transferencias, con caídas intermitentes de servicio.',
+            solution: 'Diseñamos una arquitectura basada en eventos con Apache Kafka y Go, desplegada en clústeres redundantes multirregión con latencia ultrabaja.',
+            metrics: '+340% de capacidad transaccional y 99.999% de disponibilidad durante 18 meses consecutivos.'
+          },
+          'omnitrack': {
+            title: 'OmniTrack Cloud Portal Logístico',
+            category: 'Supply Chain & IoT',
+            client: 'CloudLogix Worldwide',
+            challenge: 'La falta de visibilidad en tiempo real generaba retrasos y pérdidas estimadas en $3M anuales en cadenas de frío y carga de alto valor.',
+            solution: 'Plataforma en la nube que ingesta telemetría GPS e IoT satelital con alertas automáticas basadas en geocercas inteligentes.',
+            metrics: '52% de reducción en tiempos de espera aduanera y control del 100% de la flota activa.'
+          },
+          'healthpulse': {
+            title: 'HealthPulse Analytics',
+            category: 'Healthcare & Big Data',
+            client: 'Red Hospitalaria BioHealth',
+            challenge: 'Información clínica aislada en múltiples sistemas incompatibles imposibilitaba la detección temprana de complicaciones en pacientes.',
+            solution: 'Construcción de un Data Lake seguro en la nube con anonimización de datos y algoritmos de alerta médica temprana.',
+            metrics: '99.4% de precisión en predicción preventiva de terapia intensiva.'
+          },
+          'quantum-trade': {
+            title: 'QuantumTrade Terminal Financiero',
+            category: 'Capital Markets',
+            client: 'Alpha Hedge Fund',
+            challenge: 'Las interfaces tradicionales presentaban desfases de actualización frente a los libros de órdenes en mercados volátiles.',
+            solution: 'Terminal Single Page Application optimizada con Canvas/WebGL y streams WebSockets directos desde las bolsas bursátiles.',
+            metrics: 'Latencia inferior a 12 milisegundos con renderizado fluido a 60 FPS.'
+          },
+          'vanguard-retail': {
+            title: 'Vanguard Retail Engine',
+            category: 'E-Commerce Enterprise',
+            client: 'Vanguard Fashion Group',
+            challenge: 'Monolito saturado incapaz de resistir el tráfico en temporadas de ofertas como Cyber Monday.',
+            solution: 'E-commerce Headless desacoplado, caching perimetral con Cloudflare Workers y microservicios para inventario y checkout.',
+            metrics: 'Cero caídas durante eventos masivos y +48% en tasa de conversión móvil.'
+          },
+          'aeroplant': {
+            title: 'AeroPlant Predictive',
+            category: 'Manufactura 4.0',
+            client: 'AeroPrecision Industrial',
+            challenge: 'Costos millonarios por paradas imprevistas en la maquinaria pesada de montaje.',
+            solution: 'Sensores de vibración y temperatura conectados a modelos de Edge AI que alertan sobre desgaste antes de la falla física.',
+            metrics: 'Ahorro confirmado de $2.4 millones de dólares en su primer año de operación.'
+          }
+        };
+
+        const item = projectsData[projectKey];
+        if (!item) return;
+
+        const container = document.getElementById('dynamic-modal-content');
+        container.innerHTML = `
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 text-xs font-semibold">
+              ${item.category} • Cliente: ${item.client}
+            </span>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${item.title}</h3>
+            
+            <div class="space-y-3 pt-2">
+              <div>
+                <h5 class="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase tracking-wider">El Desafío</h5>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">${item.challenge}</p>
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">Nuestra Solución</h5>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">${item.solution}</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40">
+                <span class="text-xs font-bold text-emerald-800 dark:text-emerald-300 block">Resultado Cuantificado:</span>
+                <span class="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-400">${item.metrics}</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const modal = document.getElementById('dynamic-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        this.initLucideIcons();
+      },
+
+      // Modal demostrativo de "Sobre Nosotros"
+      showAboutModal() {
+        const container = document.getElementById('dynamic-modal-content');
+        container.innerHTML = `
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 text-xs font-semibold">
+              Gobernanza & Calidad
+            </span>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Manifiesto Técnico ApexSolutions</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Operamos bajo estándares internacionales ISO 27001 y metodologías ágiles adaptadas a empresas de alta criticidad. Cada proyecto cuenta con un Tech Lead asignado, revisión continua por pares y garantía contractual de código.
+            </p>
+            <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <p class="font-bold text-slate-800 dark:text-white">Certificación Cloud</p>
+                <p class="text-slate-500">AWS Certified Solutions Architects & Google Professional Data Engineers.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <p class="font-bold text-slate-800 dark:text-white">Seguridad Auditada</p>
+                <p class="text-slate-500">Procesos auditados según normativas SOC-2 y GDPR.</p>
+              </div>
+            </div>
+          </div>
+        `;
+        const modal = document.getElementById('dynamic-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      },
+
+      // Simulación de análisis Hero
+      triggerHeroDemo() {
+        this.showToast('Diagnóstico en Ejecución', 'Evaluando latencia de red y carga de servidores...', 'info');
+        setTimeout(() => {
+          this.showToast('Análisis Completado', 'Rendimiento: 99.8/100. Cero vulnerabilidades críticas detectadas.', 'success');
+        }, 1200);
+      },
+
+      // Copiar correo al portapapeles
+      copyToClipboard(text) {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            this.showToast('Copiado al Portapapeles', text, 'success');
+          }).catch(() => {
+            this.showToast('Contacto', text, 'info');
+          });
+        } else {
+          this.showToast('Contacto', text, 'info');
+        }
+      },
+
+      // Manejo de Envío del Formulario de Contacto Principal
+      handleContactSubmit(e) {
+        e.preventDefault();
+        
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('btn-submit-contact');
+        const submitText = document.getElementById('submit-text');
+        const submitIcon = document.getElementById('submit-icon');
+        const submitSpinner = document.getElementById('submit-spinner');
+
+        const nameInput = document.getElementById('contact-name');
+        const emailInput = document.getElementById('contact-email');
+        const serviceInput = document.getElementById('contact-service');
+        const messageInput = document.getElementById('contact-message');
+
+        // Estado visual de carga (Loading state)
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+        submitText.textContent = 'Enviando requerimiento...';
+        submitIcon.classList.add('hidden');
+        submitSpinner.classList.remove('hidden');
+
+        // Simulación de respuesta de API corporativa
+        setTimeout(() => {
+          // Restaurar botón
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+          submitText.textContent = 'Enviar Solicitud de Consulta';
+          submitIcon.classList.remove('hidden');
+          submitSpinner.classList.add('hidden');
+
+          const clientName = nameInput.value.trim() || 'Estimado/a';
+
+          // Limpiar formulario
+          form.reset();
+
+          // Mostrar Notificación Flotante de Éxito
+          ApexApp.showToast(
+            '¡Mensaje Enviado con Éxito!',
+            `Gracias ${clientName}. Tu solicitud de consultoría ha sido registrada. Un socio consultor te contactará a la brevedad.`,
+            'success',
+            6000
+          );
+        }, 1000);
+      },
+
+      // Manejo del Formulario de Cotización Rápida
+      handleQuoteSubmit(e) {
+        e.preventDefault();
+        const company = document.getElementById('quote-company').value.trim();
+        this.closeQuoteModal();
+        
+        setTimeout(() => {
+          this.showToast(
+            'Cotización Solicitada',
+            `Estimación inicial generada para "${company}". Revisa tu bandeja de entrada en unos minutos.`,
+            'success',
+            5000
+          );
+        }, 300);
+      },
+
+      // Sistema de Notificaciones Toast Elegantes
+      showToast(title, message, type = 'success', duration = 4500) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = 'pointer-events-auto flex items-start gap-3.5 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl shadow-slate-900/15 animate-toast transition-all';
+        
+        // Colores según tipo
+        let iconMarkup = '';
+        if (type === 'success') {
+          iconMarkup = `
+            <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 shrink-0">
+              <i data-lucide="check-circle" class="w-5 h-5"></i>
+            </div>
+          `;
+        } else if (type === 'info') {
+          iconMarkup = `
+            <div class="p-2 rounded-xl bg-brand-50 dark:bg-brand-950/80 text-brand-600 dark:text-brand-400 shrink-0">
+              <i data-lucide="info" class="w-5 h-5"></i>
+            </div>
+          `;
+        } else {
+          iconMarkup = `
+            <div class="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400 shrink-0">
+              <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+            </div>
+          `;
+        }
+
+        toast.innerHTML = `
+          ${iconMarkup}
+          <div class="flex-1 min-w-0 pr-2">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white tracking-wide">${title}</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-snug">${message}</p>
+          </div>
+          <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        `;
+
+        container.appendChild(toast);
+        this.initLucideIcons();
+
+        // Auto remover después del tiempo especificado
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(-10px)';
+          setTimeout(() => toast.remove(), 300);
+        }, duration);
+      }
+
+    };
+
+    // Inicializar al cargar el documento
+    document.addEventListener('DOMContentLoaded', () => {
+      ApexApp.init();
+    });
+  </script>
+
+</body>
+</html>
